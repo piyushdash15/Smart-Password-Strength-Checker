@@ -1,47 +1,52 @@
-SMART PASSWORD STRENGTH CHECKER
+Smart Password Strength Checker is a lightweight, offline Python GUI application (Tkinter) that evaluates password strength in real time.
+It analyzes length, character diversity (lowercase, uppercase, digits, special characters), entropy, weak patterns (e.g. “qwerty”, “12345”, “password”), and excessive repetition, then gives a clear strength rating, entropy value, color-coded visual bar, and actionable improvement suggestions.
 
-The Smart Password Strength Checker is a Python-based GUI application built using Tkinter.
-It analyzes passwords in real time and provides:
+Key Features:
+Real-time analysis – Strength updates instantly as you type (<KeyRelease> binding).
+Entropy calculation – Uses Shannon-style entropy in bits based on the size of the character set used.
+Weak pattern detection – Flags common insecure sequences: qwerty, asdf, zxcv, password, letmein, admin, welcome, iloveyou, 12345, 11111, etc.
+Character diversity scoring – Rewards presence of lowercase, uppercase, digits, and special characters.
+Repeating character penalty – Detects passwords that use only 1–2 unique characters.
+Visual strength meter – Canvas-based color bar that grows and changes color:
+Very Weak → Red
+Weak → Orange
+Moderate → Yellow
+Strong → Green
+Very Strong → Blue
+Helpful suggestions – Clear, specific recommendations when the password can be improved.
+Privacy-first – Everything runs locally; no network calls, no data storage.
 
-•	Strength classification
+How Scoring Works (Simplified):
+CriteriaPoints / EffectLength ≥ 16+3Length ≥ 12+2Length ≥ 8+1Contains lowercase+1Contains uppercase+1Contains digits+1Contains special chars+1High entropy (> 60 bits)+1Contains weak pattern–2Too many repeating chars–2
+Final score maps to the strength labels and colors shown above.
 
-•	Entropy value
+Requirements:
+Python 3.8 or higher
+Standard library only (tkinter, math, re) – no external packages needed
 
-•	Visual strength indicator bar
+Installation & Usage:
+Bash# Clone the repository
+git clone https://github.com/piyushdash15/Smart-Password-Strength-Checker.git
+cd Smart-Password-Strength-Checker
 
-•	Suggestions for improvement
+# Run the application
+python Password_vityarthi.py
+A window titled “Smart Password Checker” will open. Type any password (it is masked by default) and watch the strength, entropy, bar, and suggestions update live.
+Example Test Cases
+PasswordExpected Result12345Very Weak / low entropy / many suggestionspasswordWeak (common pattern)qwerty123Weak / ModerateaaaaaaaVery Weak (repetition)Str0ng!P@ssw0rdStrong / Very Strong
 
-•	Detection of weak patterns and repeated characters
+Project Structure
+textSmart-Password-Strength-Checker/
+├── Password_vityarthi.py   # Main application
+├── README.md               # This file
+└── statement.md            # Detailed project statement / problem description
 
-This tool helps users understand the security of their passwords and encourages strong password creation.
-FEATURES:
-1)	Automatically evaluates password strength as per the user types.
-2)	Compute password entropy in bits to measure unpredictability.
-3)	Identifies common sequences like:- ‘qwerty’ , ‘12345’ , ‘password’ , ‘admin’ , etc
-4)	Colored bar dynamically updates with score.
-5)	Provides meaningful recommendations for improving quality.
-6)	Evaluate lowercase , uppercase , numbers , and special characters
-TECHNOLOGIES & TOOLS USED:
-Technology/Tool	                          Purpose
-Python 3 	                                Primary programming language
-Tkinter	                                  GUI Framework
-Regex(re module)	                        Pattern detection & validation
-Math module	                              Entropy calculation
-ReportLab(only for PDF generation tasks)	Used if exporting documentation (not part of main program)
+Future Improvements (Ideas)
+Show/hide password toggle
+Estimated crack-time display
+Optional Have I Been Pwned (k-anonymity) check
+Dark mode / better theming
+Export report as PDF
 
-INSTALLATION & SETUP GUIDE:
-•	Ensure you have Python 3.8 + installed.
-•	Create a file named password_checker.py and paste your Tkinter program code inside it.
-•	The program will run and GUI window will open
-Instructions for Testing:
-Follow these steps to verify all features:
-1. Test Weak Passwords
-Examples to try:
-•	12345
-•	Password
-•	qwerty123
-•	aaaaaaa
-Expected result:
-•	Low entropy
-•	Red or Orange strength bar
-•	Multiple suggestions
+Important Instruction
+This project is open-source. Feel free to use, modify, and share it for educational or personal purposes.
